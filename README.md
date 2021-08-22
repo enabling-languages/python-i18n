@@ -1,4 +1,4 @@
-# python-i18n
+# Python internationalisation
 
 There is limited information on Python internationalisation or internationalisation best practices. What little that's available is scattered.
 
