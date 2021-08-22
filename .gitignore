@@ -227,3 +227,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Repo specfic
+notes/
