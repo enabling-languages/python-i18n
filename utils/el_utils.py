@@ -57,6 +57,8 @@ def marc21_normalise(text):
     }
     # Cyrillic variations between NFD and MNF
     cyrl_rep = {
+        "\u0418\u0306": "Й",
+        "\u0438\u0306": "й",
         "\u0413\u0301": "Ѓ",
         "\u0433\u0301": "ѓ",
         "\u0415\u0308": "Ё",
