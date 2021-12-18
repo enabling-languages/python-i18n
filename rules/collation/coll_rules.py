@@ -1,17 +1,17 @@
 ###############################
 #
-# Collation rules
+# Collation _rules
 #
 ###############################
 
 # Akan (ak, fat, twi, wss)
-ak_col_rules = (
+ak_rules = fat_rules = twi_rules = wss_rules = (
     "&E<ɛ<<<Ɛ"
     "&O<ɔ<<<Ɔ"
 )
 
 # Dinka (din, dip, diw, dib, dks, dik)
-din_col_rules = (
+din_rules = dip_rules = diw_rules = dib_rules = dks_rules = dik_rules = (
     "[normalization on]"
     "&A<<aa<<<Aa<<<AA<<ä<<<Ä<<ää<<<Ää<<<ÄÄ"
     "&D<dh<<<Dh<<<DH"
@@ -24,9 +24,8 @@ din_col_rules = (
     "&U<<uu<<<UU"
 )
 
-
 # Shan (shn, shn-Mymr, shn-Mymr-MM)   from sldr
-shn_col_rules = (
+shn_rules = (
     "&ၵ < ၶ < ၷ < င < ၸ < သ < ၺ < ၹ < တ < ၻ < ၼ < ပ < ၽ < ၾ < ၿ < မ < ယ < ရ < လ < ဝ < ႀ < ႁ"
     "&ႁ < ႃ < ိ < ီ < ော် < ေ < ၤ < ု < ူ < ုဝ် < ူဝ် < ေႃ် < ေႃ < ိုဝ် < ိူဝ် < ႆ < ၺ်"
     "&ၺ် < ၢႆ < ၢၺ် < ူၺ် < ွႆ < ွၺ် < ိုၺ် < ိူၺ် < ႟ < ဝ်"
@@ -65,9 +64,8 @@ shn_col_rules = (
     "&ွမ် < ွံ"
 )
 
-
 # Sgaw Karen (ksw)    from UTN11 v4
-ksw_col_rules = (
+ksw_rules = (
     "&\u1021 < \u1027"
     "< \u1062\u103A < \u102C\u103A < \u1038 < \u1063\u103A < \u1064"
     "< \u102B < \u1036 < \u1062 < \u102F < \u1030 < \u1037 < \u1032 < \u102D < \u102E"
@@ -77,7 +75,7 @@ ksw_col_rules = (
 )
 
 # Kayah (kyu-Mymr)   from UTN11 v4
-kyu_mymr_col_rules = (
+kyu_Mymr_rules = (
     "&\u1021 < \u1064 < \u1038"
     "< \u1072 < \u102E < \u102D < \u1036 < \u1032 < \u1073 < \u1074 < \u1034"
     "< \u102F < \u1030 < \u103C < \u103B < \u103D < \u103E"
