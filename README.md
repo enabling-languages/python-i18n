@@ -7,14 +7,17 @@ The EL notebooks contain notes on various aspects of Python internationalisation
 Feedback is welcome.
 ## Python internationalisation notes
 
-1. Boundary analysis: break iterators, text segmentation, and tokenisation
-2. [Collation](https://github.com/enabling-languages/python-i18n/blob/main/notebooks/Collation.ipynb)
-3. Text transformations:
-    1. Encoding
+1. Encoding 
+2. Boundary analysis: break iterators, text segmentation, and tokenisation &ndash; charcater, grapheme, syllable, word, sentence boundaries.
+3. Collation
+    1. [Sorting](https://github.com/enabling-languages/python-i18n/blob/main/notebooks/Collation.ipynb)
+    2. Sorting emoji
+5. String transformations:
     2. Unicode normalisation
     3. Casing operations
     4. Casefolding
     5. Transliteration
+6. Working with digits
 
 ## Google Colab notes
 
