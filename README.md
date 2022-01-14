@@ -13,11 +13,11 @@ Feedback is welcome.
 4. Collation
     1. [Sorting](https://github.com/enabling-languages/python-i18n/blob/main/notebooks/Collation.ipynb)
     2. [Sorting emoji](https://github.com/enabling-languages/python-i18n/blob/main/notebooks/Sorting_emoji.ipynb)
-5. String transformations:
-    2. Unicode normalisation
-    3. Casing operations
-    4. Casefolding
-    5. Transliteration
+5. String transformations
+    1. Unicode normalisation
+    2. Casing operations
+    3. Casefolding
+    4. Transliteration
 6. Working with digits
 
 ## Google Colab notes
