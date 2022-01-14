@@ -8,10 +8,11 @@ Feedback is welcome.
 ## Python internationalisation notes
 
 1. Encoding 
-2. Boundary analysis: break iterators, text segmentation, and tokenisation &ndash; charcater, grapheme, syllable, word, sentence boundaries.
-3. Collation
+2. Locales
+3. Boundary analysis: break iterators, text segmentation, and tokenisation &ndash; character, grapheme, syllable, word, sentence boundaries.
+4. Collation
     1. [Sorting](https://github.com/enabling-languages/python-i18n/blob/main/notebooks/Collation.ipynb)
-    2. Sorting emoji
+    2. [Sorting emoji](https://github.com/enabling-languages/python-i18n/blob/main/notebooks/Sorting_emoji.ipynb)
 5. String transformations:
     2. Unicode normalisation
     3. Casing operations
