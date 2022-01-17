@@ -73,7 +73,7 @@ def marc21_normalise(text):
     # Only process strings containing charcaters that need chasing
     if bool(re.search(r'[ouOU]\u031B', text)):
         text = replace_all(text, latn_rep)
-    if bool(re.search(r'[\\u0413\u041Au0433\u043A]\u0301|[\u0406\u0415\u0435\u0456]\u0308|[\u041A\u043A]\u0301|[\u0423\u0443]\u0306', text)):
+    if bool(re.search(r'[\u0413\u041A\u0433\u043A]\u0301|[\u0418\u0423\u0438\u0443]\u0306|[\u0406\u0415\u0435\u0456]\u0308', text))
         text = replace_all(text, cyrl_rep)
     return text
 
@@ -90,6 +90,10 @@ def normalise(text, nf="NFC"):
 # List of codepoints in string
 def codepoints(text):
     return ' '.join('U+{:04X}'.format(ord(c)) for c in text)
+
+# List codepoints and characters in string
+def cp(text):
+    return ' '.join(f"U+{ord(c):04X} ({c})" for c in text)
 
 # table of codepoints in string, giving basic data on each charcater
 def udata(text):
