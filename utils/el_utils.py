@@ -16,6 +16,7 @@
 #    import el_utils as elu
 
 import os, sys
+from unicodedata import is_normalized
 import unicodedataplus as ud
 import regex as re
 import codecs
@@ -25,7 +26,7 @@ from laonlp.tokenize import word_tokenize as lao_wt
 from pythainlp.tokenize import word_tokenize as thai_wt
 #from khmernltk import word_tokenize as khmer_wt
 from icu import BreakIterator, Locale, UnicodeString, Transliterator, UTransDirection
-# Code for internal testing and development:
+# Code for interbnal testing and development:
 # libpath = os.path.expanduser('~/dev/i18n/libr/yale-lao')
 libpath = os.path.expanduser('./')
 if libpath not in sys.path:
@@ -148,10 +149,10 @@ def stringLength(text):
     print("String: " + text)
     print("Codepoints: " +  codepoints(text))
     data = [
-        ['Characters', len(text)],
-        ['Bytes', utf8len(text)],
+        ['Characters', len(text)], 
+        ['Bytes', utf8len(text)], 
         ['Graphemes', grapheme.length(text)],
-        ['Syllables', ""],
+        ['Syllables', ""], 
         ['Words', ""]
     ]
     datahead = ['Component', 'Count']
@@ -203,10 +204,10 @@ def byteSequences(c, additional=[]):
     if ord(c) > 0xffff:
         print("Surrogate pair: " + surrogatePair(c))
     data = [
-        ['utf-8', " ".join(["{:02x}".format(x) for x in bytes(c, 'utf-8')]).upper()],
-        ['utf-16-le'," ".join(["{:02x}".format(x) for x in bytes(c, 'utf-16-le')]).upper()],
-        ['utf-16-be'," ".join(["{:02x}".format(x) for x in bytes(c, 'utf-16-be')]).upper()],
-        ['utf-32-le'," ".join(["{:02x}".format(x) for x in bytes(c, 'utf-32-le')]).upper()],
+        ['utf-8', " ".join(["{:02x}".format(x) for x in bytes(c, 'utf-8')]).upper()], 
+        ['utf-16-le'," ".join(["{:02x}".format(x) for x in bytes(c, 'utf-16-le')]).upper()], 
+        ['utf-16-be'," ".join(["{:02x}".format(x) for x in bytes(c, 'utf-16-be')]).upper()], 
+        ['utf-32-le'," ".join(["{:02x}".format(x) for x in bytes(c, 'utf-32-le')]).upper()], 
         ['utf-32-be'," ".join(["{:02x}".format(x) for x in bytes(c, 'utf-32-be')]).upper()]
     ]
     #if additional.lower() == "cesu-8":
@@ -259,7 +260,7 @@ def surrogatesToChar(seq):
 #  TODO:
 #  1. strip bidi formating characters
 #  2. strip punctuation
-#  3. normalise white space, ie collapse multiple spaces to a single space,
+#  3. normalise white space, ie collapse multiple spaces to a single space, 
 #     trim spaces at beginning of line or at end of line
 #
 
@@ -271,7 +272,7 @@ isbidi = is_bidi
 
 # Wrap string in bidirection formatting characters
 #    dir = ltr, rtl or auto
-#    mode = isolate or embedding
+#    mode = isolate, embedding, override
 def bidi_envelope(s, dir="auto", mode="isolate"):
     mode = mode.lower()
     dir = dir.lower()
@@ -325,9 +326,9 @@ def strip_punct(s, include=""):
         s = re.sub('-(?=[\w])', ' ', s)
         s = re.sub('\p{P}', '', s)
     return s
-# test string
-#  \t\n  'Once upon'ga time, help; - trans-from here's 78 'the rub'?! 'Blah, blah' yeah.'    \t\n
-#
+# test string 
+#  \t\n  'Once upon'ga time, help; - trans-from here's 78 'the rub'?! 'Blah, blah' yeah.'    \t\n  
+# 
 
 def text_sanitise(s):
     s = ud.normalize("NFC", s)
@@ -437,7 +438,7 @@ def prep_string(s, dir, lang, b="latin-only"):
         s = s.replace("\u0327", "\u0328").replace("\u031C", "\u0328")
     return s
 
-# direction (dir) = direction of transliteration ; forward (to Latin) | reverse (from Latin)
+# direction (dir) = direction of transliteration ; forward (to Latin) | reverse (from Latin) 
 # bicameral script (bicameral) = latin_only | both
 # def to_native(bib_data, translit_table="laoo_t_latn_m0_ALALOC", dir="reverse", bicameral="latin_only" ):
 #     bib_data = prep_string(bib_data, dir, bicameral)
@@ -489,7 +490,7 @@ def el_transliterate(bib_data, lang, dir="forward", nf="nfd"):
             # for key, value in word_dict.items():
             #     if key in bib_data:
             #         res = bib_data.replace(key, value)
-
+    
     else:
         res = bib_data
     if nf != "nfd":
@@ -576,3 +577,77 @@ def casing(text, case="lower", loc=None):
     elif case == "casefold" or case == "fold":
         text = str(UnicodeString(text).foldCase(loc))
     return text
+
+#
+# Casefolding and matching
+# 
+
+def caseless_match(x, y):
+  return x.casefold() == y.casefold()
+
+def canonical_caseless_match(x, y):
+  return ud.normalize("NFD", ud.normalize("NFD", x).casefold()) == ud.normalize("NFD", ud.normalize("NFD", y).casefold())
+
+def compatibility_caseless_match(x, y):
+  return ud.normalize("NFKD", ud.normalize("NFKD", ud.normalize("NFD", x).casefold()).casefold()) == ud.normalize("NFKD", ud.normalize("NFKD", ud.normalize("NFD", y).casefold()).casefold())
+
+def NFKC_Casefold(s):
+  return ud.normalize("NFC", ud.normalize('NFKC', s).casefold())
+
+def identifier_caseless_match(x, y):
+  return NFKC_Casefold(ud.normalize("NFD", x)) == NFKC_Casefold(ud.normalize("NFD", y))
+
+# Clean up presentation forms in data
+#    Converts presentation forms to appropriate standard characters
+
+def has_presentation_forms(text):
+    pattern = r'([\p{InAlphabetic_Presentation_Forms}\p{InArabic_Presentation_Forms-A}\p{InArabic_Presentation_Forms-B}]+)'
+    return bool(re.findall(pattern, text))
+
+def clean_presentation_forms(text, folding=False):
+    def clean_pf(match, folding):
+        return  match.group(1).casefold() if folding else ud.normalize("NFKC", match.group(1))
+    pattern = r'([\p{InAlphabetic_Presentation_Forms}\p{InArabic_Presentation_Forms-A}\p{InArabic_Presentation_Forms-B}]+)'
+    return re.sub(pattern, lambda match, folding=folding: clean_pf(match, folding), text)
+
+
+# Clean up doubled diacritics in data
+#    Removes doubled diacrtics in data
+
+def has_doubled_diacritics(text):
+    return bool(re.findall(r'(\p{Mn})\1+', ud.normalize("NFD", text)))
+
+def clean_diacritics(text, nf="nfc"):
+    if not has_doubled_diacritics(text):
+        return ud.normalize(nf.upper(), text)
+    return ud.normalize(nf.upper(), re.sub(r'(\p{Mn})\1+', r'\1', ud.normalize("NFD", text)))
+
+def data_check(text, nf="NFC"):
+    print("Data check ...")
+    if has_doubled_diacritics(text):
+        print("* String has repeated contiguous diacritics.")
+    if has_presentation_forms(text):
+        print("* Presentation forms in string.")
+    if bool(re.findall(r'\p{N}', text)) and bool(re.findall(r'[^0-9]', text)):
+        print("* Non-Arabic numerals present in string")
+    if ud.is_normalized("NFC", text) or ud.is_normalized("NFKC", text):
+        print("* String uses precomposed characters")
+    elif ud.is_normalized("NFD", text) or ud.is_normalized("NFKD", text):
+        print("* String uses decomposed characters")
+    print("Codepoints: ", codepoints(text))
+    print("Unicode scripts: ", list(set([ud.script(a) for a in text])))
+
+
+
+
+
+# add checks:
+#    * RLO and LRO in string
+#    * BOM at start of string
+#    * check if data is precomposed (nfc, nfkc) or decomposed (nfd, nfkd)
+
+# Test string
+#     a = "Trá́ce, ﬁnd an oﬃce: ٣"
+#     data_check(a)
+
+
