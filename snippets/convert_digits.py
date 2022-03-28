@@ -16,7 +16,6 @@ def convert_digits(s, sep = (",", ".")):
         s = s.replace(tsep, "")
         s = ''.join([str(ud.decimal(c, c)) for c in s])
         if dsep in s:
-            s = float(s.replace(dsep, ".")) if dsep != "." else float(s)
-            return s
-        s = int(s.replace(dsep, ".")) if dsep != "." else  int(s)
+            return float(s.replace(dsep, ".")) if dsep != "." else float(s)
+        return int(s)
     return s
