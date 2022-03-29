@@ -27,3 +27,14 @@ def normalised_sort(s, nf="NFC", loc=False):
     if nf.upper() in ["NFC", "NFKC", "NFD", "NFKD"]:
         s = locale.strxfrm(ud.normalize(nf, s).lower()) if loc else ud.normalize(nf, s).lower()
     return s
+
+# Function to assist in locale specific or ICU sorting
+def df_sort(series, key):
+    def sort_series(key=None,reverse=False):
+        def sorter(series):
+            series_list = list(series)
+            return [series_list.index(i) for i in sorted(series_list,key=key,reverse=reverse)]
+        return sorter
+    if (isinstance(series, pd.Series)):
+        sort_by_custom_dict = sort_series(key=key)
+        return df.iloc[sort_by_custom_dict(series)]
