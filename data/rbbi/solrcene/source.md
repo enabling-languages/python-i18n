@@ -1,0 +1,1 @@
+* https://github.com/chrismattmann/solrcene/tree/master/modules/analysis/icu/src/data

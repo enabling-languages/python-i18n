@@ -1,0 +1,1 @@
+* https://gitbox.apache.org/repos/asf?p=lucene.git;a=tree;f=lucene/analysis/icu/src/data;h=e7275ffa9541dab51e4b9a62166aeef457c5c22f;hb=refs/heads/main
