@@ -23,9 +23,10 @@
 import locale
 import unicodedata as ud
 
-def normalised_sort(s, nf="NFC", loc=False):
-    if nf.upper() in ["NFC", "NFKC", "NFD", "NFKD"]:
-        s = locale.strxfrm(ud.normalize(nf, s).lower()) if loc else ud.normalize(nf, s).lower()
+def normalised_sort(s, nf="NFD", loc=False):
+    nf = nf.upper()
+    if nf in ["NFC", "NFKC", "NFD", "NFKD"]:
+        s = locale.strxfrm(ud.normalize(nf, s.lower())) if loc else ud.normalize(nf, s.lower())
     return s
 
 # Function to assist in locale specific or ICU sorting
