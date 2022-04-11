@@ -522,7 +522,7 @@ def el_transliterate(bib_data, lang, dir="forward", nf="nfd"):
 #   s = string of digits
 #   sep is a tuple containing the thousands (grouping) seperator and the decimal seperator
 def convert_digits(s, sep = (",", ".")):
-    nd = re.compile(r'^-?\p{Nd}[,.\u066B\u066C\u0020\u2009\p{Nd}]+$')
+    nd = re.compile(r'^-?\p{Nd}[,.\u066B\u066C\u0020\u2009\p{Nd}]*$')
     tsep, dsep = sep
     if nd.match(s):
         s = s.replace(tsep, "")

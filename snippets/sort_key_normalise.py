@@ -23,14 +23,29 @@
 import locale
 import unicodedata as ud
 
-def normalised_sort(s, nf="NFD", loc=False):
+# def normalised_sort(s, nf="NFD", loc=False):
+#     nf = nf.upper()
+#     if nf in ["NFC", "NFKC", "NFD", "NFKD"]:
+#         s = locale.strxfrm(ud.normalize(nf, s.lower())) if loc else ud.normalize(nf, s.lower())
+#     return s
+
+def normalised_sort(s, nf="NFKD", loc=False):
     nf = nf.upper()
     if nf in ["NFC", "NFKC", "NFD", "NFKD"]:
-        s = locale.strxfrm(ud.normalize(nf, s.lower())) if loc else ud.normalize(nf, s.lower())
+        if isinstance(s, pd.core.series.Series):
+            s = s.str.normalize(nf).str.lower()
+        else:
+            s = locale.strxfrm(ud.normalize(nf, s).lower()) if loc else ud.normalize(nf, s).lower()
+    return s
+
+def normalised_string(s, nf="NFKD"):
+    nf = nf.upper()
+    if nf in ["NFC", "NFKC", "NFD", "NFKD"]:
+        s = ud.normalize(nf, s).lower()
     return s
 
 # Function to assist in locale specific or ICU sorting
-def df_sort(series, key):
+def df_sort(dataframe, series, key):
     def sort_series(key=None,reverse=False):
         def sorter(series):
             series_list = list(series)
@@ -38,4 +53,5 @@ def df_sort(series, key):
         return sorter
     if (isinstance(series, pd.Series)):
         sort_by_custom_dict = sort_series(key=key)
-        return df.iloc[sort_by_custom_dict(series)]
+        return dataframe.iloc[sort_by_custom_dict(series)]
+
