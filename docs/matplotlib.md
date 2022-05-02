@@ -1,4 +1,4 @@
-# Pandas internationalisation
+# Python and Pandas internationalisation
 
 ## Data visualisation issues for languages that need bidirectional support or complex font rendering.
 
@@ -37,11 +37,11 @@ If a RTL layout is required:
 
 ### Examples
 
-The following python scripts uses [Sorani Kurdish data](../data/demographics.tsv):
+The following python scripts uses [Sorani Kurdish data](https://github.com/enabling-languages/python-i18n/blob/main/data/demographics.tsv):
 
-* [matplotlib](matplotlib_kurdish.py)
-* [pandas.Dataframe.plot](pandas_plot_kurdish.py)
-* [seaborn](seaborn_kurdish.py)
-* wordcount
+* [matplotlib](https://github.com/enabling-languages/python-i18n/blob/main/py/matplotlib_kurdish.py)
+* [pandas.Dataframe.plot](https://github.com/enabling-languages/python-i18n/blob/main/py/pandas_plot_kurdish.py)
+* [seaborn](https://github.com/enabling-languages/python-i18n/blob/main/py/seaborn_kurdish.py)
+* [wordcount](https://github.com/enabling-languages/python-i18n/blob/main/py/wordcloud_kurdish.py)
 
-<figure style="border: 1px solid silver;"><img src="seaborn_kurdish.png" alt="Kurdish plot using Seaborn" style="width:100%"><figcaption align = "center" style="text-align: center"><b>Fig.1 - Kurdish bar charts in both LTR and RTL layouts.</b></figcaption></figure>
+<figure style="border: 1px solid silver;"><img src="../py/seaborn_kurdish.png" alt="Kurdish plot using Seaborn" style="width:100%"><figcaption align = "center" style="text-align: center"><b>Fig.1 - Kurdish bar charts in both LTR and RTL layouts.</b></figcaption></figure>
