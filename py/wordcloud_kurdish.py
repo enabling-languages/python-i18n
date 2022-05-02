@@ -39,8 +39,7 @@ text = """
 بەھۆی ئەوەی کە کوردەکان لە ژێر دەسەڵاتی عوسمانی و ئێران بوون و ئەلفوبێی فەرمیی ئەو دوو وڵاتە ئەلفوبێی عەرەبی بوو، کوردەکانیش تا پێش سییەکان تەنیا ئەلفوبێی عەرەبییان بۆ نووسینی کوردی بەکار دەھێنا. لە تورکیا، لە دوای بە فەرمیکردنی ئەلفوبێی لاتینی بۆ زمانی تورکی، جەلادەت عەلی بەدرخان لە ساڵی ١٩٣٢ ئەلفوبێیەکی لاتینیی بۆ زمانی کوردی داھێنا کە ئێستا بە ناوی "ئەلفوبێی ھاوار" یان "بەدرخان" دەناسرێت. 
 """
 
-
-font_file = os.path.expanduser("~/.local/share/fonts/fontamin/TrueType/Estedad-FD/Estedad_FD_Thin.ttf")
+font_file = os.path.expanduser("~/.local/share/fonts/fontamin/TrueType/Estedad/Estedad_Regular.ttf")
 
 word_cloud = WordCloud(font_path=font_file, collocations = False, background_color = 'white', stopwords=ckb_stopwords).generate(text)
 plt.imshow(word_cloud, interpolation='bilinear')

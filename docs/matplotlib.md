@@ -24,7 +24,7 @@ There are two missing pieces at this point:
 
 ### Numeral systems
 
-Regarding the first issue, it is posisble to use `matplotlib.ticker.FuncFormatter()` to apply a function to convert to the target numeral system, and apply necessary grouping and decimal seperators.
+Regarding the first issue, it is possible to use `matplotlib.ticker.FuncFormatter()` to apply a function to convert to the target numeral system, and apply necessary grouping and decimal seperators.
 ### RTL layout and data visualisation
 
 It isn't always necessary to change the layout of the plot. If the plot is using a cartesian coordinate system, it is best to use the default layout. 
@@ -44,4 +44,6 @@ The following python scripts uses [Sorani Kurdish data](https://github.com/enabl
 * [seaborn](https://github.com/enabling-languages/python-i18n/blob/main/py/seaborn_kurdish.py)
 * [wordcount](https://github.com/enabling-languages/python-i18n/blob/main/py/wordcloud_kurdish.py)
 
-<figure style="border: 1px solid silver;"><img src="../py/seaborn_kurdish.png" alt="Kurdish plot using Seaborn" style="width:100%"><figcaption align = "center" style="text-align: center"><b>Fig.1 - Kurdish bar charts in both LTR and RTL layouts.</b></figcaption></figure>
+<figure style="border: 1px solid silver;"><img src="https://raw.githubusercontent.com/enabling-languages/python-i18n/main/py/seaborn_kurdish.png" alt="Kurdish plot using Seaborn" style="width:100%"><figcaption align = "center" style="text-align: center"><b>Fig.1 - Kurdish bar charts in both LTR and RTL layouts.</b></figcaption></figure>
+
+<figure style="border: 1px solid silver;"><img src="https://raw.githubusercontent.com/enabling-languages/python-i18n/main/py/wordcloud_kurdish.png" alt="Kurdish wordcloud" style="width:100%"><figcaption align = "center" style="text-align: center"><b>Fig.2 - Kurdish wordcloud.</b></figcaption></figure>
