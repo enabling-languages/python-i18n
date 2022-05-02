@@ -15,8 +15,6 @@ The package [mplcairo](https://github.com/matplotlib/mplcairo) provides an alter
 
 The key limitations for _mplcairo_ are bugs in iPython and the lack of support for _Jupyter notebooks_.
 
-### RTL layout and data visualisation
-
 Using the _mplcairo_ backend for _matplotlib_ we can display plot titles, axes labels and categorical tick labels in any language we need to support.
 
 There are two missing pieces at this point:
@@ -24,9 +22,10 @@ There are two missing pieces at this point:
 1. Display of numeric tick labels in a numeral system approperiate for the UI language.
 2. Choice on bidirectional layout requirements of the data visualisation.
 
-Regarding the first issue, it is posisble to use `matplotlib.ticker.FuncFormatter()` to apply a function to convert to the target numeral system, and apply necessary grouping and decimal seperators.
+### Numeral systems
 
-There is limited guidance available on data visualisation in languages that use bidirectional text. Both default LTR layouts and tailored RTL layouts can be observed.
+Regarding the first issue, it is posisble to use `matplotlib.ticker.FuncFormatter()` to apply a function to convert to the target numeral system, and apply necessary grouping and decimal seperators.
+### RTL layout and data visualisation
 
 It isn't always necessary to change the layout of the plot. If the plot is using a cartesian coordinate system, it is best to use the default layout. 
 The layout used, combinined with user expectations, will impact the interpretation of trends in data visualisations. User interpretation of the visualisations, combined with user experience are critical inputs into a data visualisation design.
@@ -34,14 +33,14 @@ The layout used, combinined with user expectations, will impact the interpretati
 If a RTL layout is required:
 
 1. Use `yaxis.tick_right()` and `yaxis.set_label_position("right")` to reposition y-axis to the right side of the plot
-2. Use plt.gca().invert_xaxis() to invert the x-axis. This step may not be necessary. UX is an important consideration.
+2. Use `plt.gca().invert_xaxis()` to invert the x-axis. This step may not be necessary. UX is an important consideration.
 
 ### Examples
 
 The following python scripts uses [Sorani Kurdish data](../data/demographics.tsv):
 
-* matplotlib
-* pandas.Dataframe.plot
+* [matplotlib](matplotlib_kurdish.py)
+* [pandas.Dataframe.plot](pandas_plot_kurdish.py)
 * [seaborn](seaborn_kurdish.py)
 * wordcount
 
