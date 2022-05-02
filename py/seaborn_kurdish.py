@@ -103,7 +103,8 @@ axes[1].get_yaxis().set_major_formatter(ns_formatter)
 axes[1].yaxis.tick_right()
 axes[1].yaxis.set_label_position("right")
 # invert x-axis for axes[1]
-plt.gca().invert_xaxis()
+#plt.gca().invert_xaxis()
+axes[1].invert_xaxis()
 
 # block=True required for running script in CLI when outputting canvas to widget.
 plt.show(block=True)
