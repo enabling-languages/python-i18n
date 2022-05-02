@@ -45,4 +45,4 @@ The following python scripts uses [Sorani Kurdish data](../data/demographics.tsv
 * [seaborn](seaborn_kurdish.py)
 * wordcount
 
-<figure style="border: 1px solid silver;"><img src="seaborn_kurdish.png" alt="Kurdish plot using Seaborn" style="width:100%"><figcaption align = "center"><b>Fig.1 - Kurdish bar charts in both LTR and RTL layouts.</b></figcaption></figure>
+<figure style="border: 1px solid silver;"><img src="seaborn_kurdish.png" alt="Kurdish plot using Seaborn" style="width:100%"><figcaption align = "center" style="text-align: center"><b>Fig.1 - Kurdish bar charts in both LTR and RTL layouts.</b></figcaption></figure>
