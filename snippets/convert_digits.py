@@ -116,3 +116,16 @@ def convert_numerals(n, system="arabext", decimal=2, sep=["", "."]):
     t = n.maketrans(data["latn"]["digits"], data[system]["digits"])
     locale.setlocale(locale.LC_ALL, "")
     return n.translate(t).replace("ṯ", sep[0] ).replace("ḏ", sep[1])
+
+
+#
+# Locale formatted numbers using PyICU
+#   Supports both integers and floating point numbers.
+#
+from icu import Locale, NumberFormat
+
+def icu_formatted_digits(d, loc=None):
+    if loc is None:
+        loc = Locale.getRoot()
+    formatter = NumberFormat.createInstance(loc)
+    return formatter.format(d)
