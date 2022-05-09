@@ -15,6 +15,7 @@ Feedback is welcome.
 * Data visualisation
     1. [Matplotlib, pandas plot, seaborn, wordcloud](https://github.com/enabling-languages/python-i18n/blob/main/docs/matplotlib.md)
     2. [Locale specific formatting of numeric tick labels on matplotlib](https://github.com/enabling-languages/python-i18n/blob/main/notebooks/matplotlib_locale.ipynb)
+    3. [Using PyICU to format matplotlib numeric tick labels](https://github.com/enabling-languages/python-i18n/blob/main/notebooks/matplotlib_pyicu.ipynb)
 * Working with digits
     1. [snippets](https://github.com/enabling-languages/python-i18n/blob/main/snippets/convert_digits.py)
 
