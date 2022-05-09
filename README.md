@@ -5,6 +5,7 @@ There is limited information on Python internationalisation or Python internatio
 The EL notebooks contain notes on various aspects of Python internationalisation, and new topics will be added over time.
 
 Feedback is welcome.
+
 ## Python internationalisation notes
 
 * Collation
@@ -12,7 +13,8 @@ Feedback is welcome.
     2. [Sorting emoji](https://github.com/enabling-languages/python-i18n/blob/main/notebooks/Sorting_emoji.ipynb)
     3. [Sorting pandas](https://github.com/enabling-languages/python-i18n/blob/main/notebooks/sorting_pandas.ipynb)
 * Data visualisation
-    1. [matplotlib, pandas plot, seaborn, wordcloud](https://github.com/enabling-languages/python-i18n/blob/main/docs/matplotlib.md)
+    1. [Matplotlib, pandas plot, seaborn, wordcloud](https://github.com/enabling-languages/python-i18n/blob/main/docs/matplotlib.md)
+    2. [Locale specific formatting of numeric tick labels on matplotlib](https://github.com/enabling-languages/python-i18n/blob/main/notebooks/matplotlib_locale.ipynb)
 * Working with digits
     1. [snippets](https://github.com/enabling-languages/python-i18n/blob/main/snippets/convert_digits.py)
 
