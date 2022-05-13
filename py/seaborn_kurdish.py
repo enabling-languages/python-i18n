@@ -36,7 +36,7 @@ import unicodedata as ud, regex as re
 
 # Convert non-Western Arabic digits to Western Arabic digits
 def convert_digits(s, sep = (",", ".")):
-    nd = re.compile(r'^-?\p{Nd}[,.\u066B\u066C\u0020\u2009\p{Nd}]*$')
+    nd = re.compile(r'^-?\p{Nd}[,.\u066B\u066C\u0020\u2009\u202F\p{Nd}]*$')
     tsep, dsep = sep
     if nd.match(s):
         s = s.replace(tsep, "")

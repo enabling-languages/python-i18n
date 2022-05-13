@@ -523,7 +523,7 @@ def el_transliterate(bib_data, lang, dir="forward", nf="nfd"):
 #   s = string of digits
 #   sep is a tuple containing the thousands (grouping) seperator and the decimal seperator
 def convert_digits(s, sep = (",", ".")):
-    nd = re.compile(r'^-?\p{Nd}[,.\u066B\u066C\u0020\u2009\p{Nd}]*$')
+    nd = re.compile(r'^-?\p{Nd}[,.\u066B\u066C\u0020\u2009\u202F\p{Nd}]*$')
     tsep, dsep = sep
     if nd.match(s):
         s = s.replace(tsep, "")
@@ -544,8 +544,8 @@ def convert_digits(s, sep = (",", ".")):
 
 def is_number(v, sep = (",", ".")):
     original = v
-    n = re.compile(r'^-?\p{N}[,.\u066B\u066C\u0020\u2009\p{N}]+$')
-    nd = re.compile(r'^-?\p{Nd}[,.\u066B\u066C\u0020\u2009\p{Nd}]+$')
+    n = re.compile(r'^-?\p{N}[,.\u066B\u066C\u0020\u2009\u202F\p{N}]+$')
+    nd = re.compile(r'^-?\p{Nd}[,.\u066B\u066C\u0020\u2009\u202F\p{Nd}]+$')
     v = "".join(v.split())
     if isinstance(v, int) or isinstance(v, float):
         return isinstance(v, (int, str)), type(v), v
@@ -567,18 +567,36 @@ def is_number(v, sep = (",", ".")):
 # https://www.ezzeddinabdullah.com/posts/pythonic-translate
 # https://stackoverflow.com/questions/20134737/python-matplotlib-use-locale-to-format-y-axis/20136623
 # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/numberingSystem
-def convert_numerals(n, system="arabext", decimal=2, sep=["", "."]):
+#
+# convert_numeral_systems()
+#
+#    Convert numerals between numeral systems
+#      * Default settings convert python int or float to the specified numeral system.
+#      * Returns a string
+#      * Two parameters added to assist in changing matplotlib tick labels: p and scale parameters.
+#        These two parameters should be ignored in all other cases.
+
+# import locale
+def convert_numeral_systems(n, p=None, system_out="", system_in="latn", decimal=2, sep_in=["", "."], sep_out=["", "."], scale=None):
     locale.setlocale(locale.LC_ALL, "en_US.UTF-8")
     decimal_places = decimal
-    format_string = '%0.' + str(decimal_places) + 'f' if type(n) == float else '%d'
-    n = locale.format_string(format_string, n, grouping=True, monetary=True)
-    n = n.replace(",", "ṯ").replace(".", "ḏ")
-    n = str(n)
+    if system_in == "latn" and sep_in == ["", "."]:
+        n = n / scale if scale else n
+        format_string = '%0.' + str(decimal_places) + 'f' if type(n) == float else '%d'
+        n = locale.format_string(format_string, n, grouping=True, monetary=True)
+        n = n.replace(",", "ṯ").replace(".", "ḏ")
+        #n = str(n)
+    if sep_in[0] in [" ", ",", "٬", "\u2009"]:
+        n = n.replace(r'[\u0020,٬\u2009]', "ṯ")
+    elif sep_in[0] == ".":
+        n = n.replace(".", "ṯ")
+    if sep_in[1] in [",", ".", "٫"]:
+        n = n.replace(r'[,.٫]', "ḏ")
     data = {
-        "adlm" : {'name' : 'Adlam Digits (adlm)', "digits" : "𞥐𞥑𞥒𞥓𞥔𞥕𞥖𞥗𞥘𞥙", "sep": [",", "."]},
+        "adlm" : {'name' : 'Adlam Digits (adlm)', "digits" : "𞥐𞥑𞥒𞥓𞥔𞥕𞥖𞥗𞥘𞥙", "sep_out": [",", "."]},
         "ahom" : {'name' : 'Ahom Digits (ahom)', "digits" : "𑜰𑜱𑜲𑜳𑜴𑜵𑜶𑜷𑜸𑜹"},
         "arab" : {'name' : 'Arabic-Indic Digits (arab)', "digits" : "٠١٢٣٤٥٦٧٨٩"},
-        "arabext" : {'name' : 'Extended Arabic-Indic Digits (arabext)', "digits" : "۰۱۲۳۴۵۶۷۸۹", "sep": ["\u066C", "\u066B"]},
+        "arabext" : {'name' : 'Extended Arabic-Indic Digits (arabext)', "digits" : "۰۱۲۳۴۵۶۷۸۹", "sep_out_out": ["\u066C", "\u066B"]},
         "bali" : {'name' : 'Balinese Digits (bali)', "digits" : "᭐᭑᭒᭓᭔᭕᭖᭗᭘᭙"},
         "beng" : {'name' : 'Bangla Digits (beng)', "digits" : "০১২৩৪৫৬৭৮৯"},
         "bhks" : {'name' : 'Bhaiksuki  Digits (bhks)', "digits" : "𑱐𑱑𑱒𑱓𑱔𑱕𑱖𑱗𑱘𑱙"},
@@ -609,8 +627,8 @@ def convert_numerals(n, system="arabext", decimal=2, sep=["", "."]):
         "mong" : {'name' : 'Mongolian Digits (mong)', "digits" : "᠐᠑᠒᠓᠔᠕᠖᠗᠘᠙"},
         "mroo" : {'name' : 'Mro Digits (mroo)', "digits" : "𖩠𖩡𖩢𖩣𖩤𖩥𖩦𖩧𖩨𖩩"},
         "mtei" : {'name' : 'Meetei Mayek Digits (mtei)', "digits" : "꯰꯱꯲꯳꯴꯵꯶꯷꯸꯹"},
-        "mymr" : {'name' : 'Myanmar Digits (mymr)', "digits" : "၀၁၂၃၄၅၆၇၈၉", "sep": [",", "."]},
-        "mymrshan" : {'name' : 'Myanmar Shan Digits (mymrshan)', "digits" : "႐႑႒႓႔႕႖႗႘႙", "sep": [",", "."]},
+        "mymr" : {'name' : 'Myanmar Digits (mymr)', "digits" : "၀၁၂၃၄၅၆၇၈၉", "sep_out": [",", "."]},
+        "mymrshan" : {'name' : 'Myanmar Shan Digits (mymrshan)', "digits" : "႐႑႒႓႔႕႖႗႘႙", "sep_out": [",", "."]},
         "mymrtlng" : {'name' : 'Myanmar Tai Laing Digits (mymrtlng)', "digits" : "꧰꧱꧲꧳꧴꧵꧶꧷꧸꧹"},
         "newa" : {'name' : 'Pracalit Digits (newa)', "digits" : "𑑐𑑑𑑒𑑓𑑔𑑕𑑖𑑗𑑘𑑙"},
         "nkoo" : {'name' : "N’Ko Digits (nkoo)", "digits" : "߀߁߂߃߄߅߆߇߈߉"},
@@ -635,13 +653,13 @@ def convert_numerals(n, system="arabext", decimal=2, sep=["", "."]):
         "vaii" : {'name' : 'Vai Digits (vaii)', "digits" : "꘠꘡꘢꘣꘤꘥꘦꘧꘨꘩"},
         "wara" : {'name' : 'Warang Citi Digits (wara)', "digits" : "𑣠𑣡𑣢𑣣𑣤𑣥𑣦𑣧𑣨𑣩"},
         "wcho" : {'name' : 'Wancho Digits (wcho)', "digits" : "𞋰𞋱𞋲𞋳𞋴𞋵𞋶𞋷𞋸𞋹"}
-        #"hanidec" : {'name' : 'Chinese Decimal Numerals (hanidec)', "digits": '', "sep": [",", "."]}
+        #"hanidec" : {'name' : 'Chinese Decimal Numerals (hanidec)', "digits": '', "sep_out": [",", "."]}
     }
     try:
-        sep = data[system]['sep']
+        sep = data[system_out]['sep_out']
     except KeyError:
-        sep = sep
-    t = n.maketrans(data["latn"]["digits"], data[system]["digits"])
+        sep = sep_out
+    t = n.maketrans(data[system_in]["digits"], data[system_out]["digits"])
     locale.setlocale(locale.LC_ALL, "")
     return n.translate(t).replace("ṯ", sep[0] ).replace("ḏ", sep[1])
 
