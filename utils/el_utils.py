@@ -16,7 +16,6 @@
 #    import el_utils as elu
 
 import os, sys, locale
-from unicodedata import is_normalized
 import unicodedataplus as ud
 import regex as re
 import codecs
@@ -50,54 +49,65 @@ def utf16len(text):
     return len(text.encode('utf-16-le'))
 
 # Replace values matching dictionary keys with values
-def replace_all(text, dic):
-    for i, j in dic.items():
-        text = text.replace(i, j)
-    return text
-
-# Normalise strings according to MARC21 Character repetoire requirements
-# MNF (Marc Normalisation Form)
-def marc21_normalise(text):
-    # Normalise to NFD
-    text = normalise("NFD", text)
-    # Latin variations between NFD and MNF
-    latn_rep = {
-    "\u004F\u031B": "Ơ",
-    "\u008F\u031B": "ơ",
-    "\u0055\u031B": "Ư",
-    "\u0075\u031B": "ư"
-    }
-    # Cyrillic variations between NFD and MNF
-    cyrl_rep = {
-        "\u0418\u0306": "Й",
-        "\u0438\u0306": "й",
-        "\u0413\u0301": "Ѓ",
-        "\u0433\u0301": "ѓ",
-        "\u0415\u0308": "Ё",
-        "\u0435\u0308": "ё",
-        "\u0406\u0308": "Ї",
-        "\u0456\u0308": "ї",
-        "\u041A\u0301": "Ќ",
-        "\u043A\u0301": "ќ",
-        "\u0423\u0306": "Ў",
-        "\u0443\u0306": "ў"
-    }
-    # Only process strings containing charcaters that need chasing
-    if bool(re.search(r'[ouOU]\u031B', text)):
-        text = replace_all(text, latn_rep)
-    if bool(re.search(r'[\u0413\u041A\u0433\u043A]\u0301|[\u0418\u0423\u0438\u0443]\u0306|[\u0406\u0415\u0435\u0456]\u0308', text)):
-        text = replace_all(text, cyrl_rep)
+def replace_all(text, pattern_dict):
+    for key in pattern_dict.keys():
+        text = text.replace(key, str(pattern_dict[key]))
     return text
 
 # Normalise to specified Unicode Normalisation Form, defaulting to NFC.
 # nf = NFC | NFKC | NFD | NFKD | NFM
-def normalise(nf, s):
+# NFM: Normalise strings according to MARC21 Character repetoire requirements
+# TODO:
+#    * Add support for NFKC_CF
+def normalise(nf, text):
     nf = nf.upper()
+    if nf not in ["NFC", "NFKC", "NFD", "NFKD", "NFM"]:
+        nf="NFC"
+    # MNF (Marc Normalisation Form)
+    def marc21_normalise(text):
+        # Normalise to NFD
+        text = ud.normalize("NFD", text)
+        # Latin variations between NFD and MNF
+        latn_rep = {
+            "\u004F\u031B": "\u01A0",
+            "\u006F\u031B": "\u01A1",
+            "\u0055\u031B": "\u01AF",
+            "\u0075\u031B": "\u01B0"
+        }
+        # Cyrillic variations between NFD and MNF
+        cyrl_rep = {
+            "\u0418\u0306": "\u0419",
+            "\u0438\u0306": "\u0439",
+            "\u0413\u0301": "\u0403",
+            "\u0433\u0301": "\u0453",
+            "\u0415\u0308": "\u0401",
+            "\u0435\u0308": "\u0451",
+            "\u0406\u0308": "\u0407",
+            "\u0456\u0308": "\u0457",
+            "\u041A\u0301": "\u040C",
+            "\u043A\u0301": "\u045C",
+            "\u0423\u0306": "\u040E",
+            "\u0443\u0306": "\u045E"
+        }
+        # Arabic variations between NFD and MNF
+        arab_rep = {
+            "\u0627\u0653": "\u0622",
+            "\u0627\u0654": "\u0623",
+            "\u0648\u0654": "\u0624",
+            "\u0627\u0655": "\u0625",
+            "\u064A\u0654": "\u0626"
+        }
+        # Only process strings containing characters that need replacing
+        if bool(re.search(r'[ouOU]\u031B', text)):
+            text = replace_all(text, latn_rep)
+        if bool(re.search(r'[\u0413\u041A\u0433\u043A]\u0301|[\u0418\u0423\u0438\u0443]\u0306|[\u0406\u0415\u0435\u0456]\u0308', text)):
+            text = replace_all(text, cyrl_rep)
+        if bool(re.search(r'[\u0627\u0648\u064A]\u0654|\u0627\u0655|\u0627\u0653', text)):
+            text = replace_all(text, arab_rep)
+        return text
     if nf == "NFM":
-        return marc21_normalise(s)
-    else:
-        return ud.normalize(nf, s)
-    return s
+        return marc21_normalise(text)
+    return ud.normalize(nf, text)
 
 # codepoints in string
 # def codepoints(text, prefix=True):
@@ -122,6 +132,11 @@ def graphemes(text):
     return re.findall(r'\X',text)
 
 gr = graphemes
+
+# Prepend dotted circle to combining diacritics in a string
+# Input string, returns string
+def add_dotted_circle(text):
+    return "".join(["\u25CC" + i if ud.combining(i) else i for i in list(text)])
 
 def isalpha_(text):
     if len(text) == 1:

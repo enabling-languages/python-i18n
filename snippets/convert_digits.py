@@ -133,6 +133,37 @@ def convert_numeral_systems(n, p=None, system_out="", system_in="latn", decimal=
 
 
 #
+# convert_to_arab_ns()
+#
+#    Convert numerals from Western Arabic numerals to Eastern Arabic numerals.
+#    A numeral system (ns) specific version of convert_numeral_systems().
+#
+#    Returns a string
+#
+
+def convert_to_arab_ns(n, p=None, decimal=2, sep_in=["", "."], sep_out=["\u066C", "\u066B"], scale=None):
+    locale.setlocale(locale.LC_ALL, "en_US.UTF-8")
+    decimal_places = decimal
+    if sep_in == ["", "."]:
+        n = n * scale if scale else n
+        format_string = '%0.' + str(decimal_places) + 'f' if type(n) == float else '%d'
+        n = locale.format_string(format_string, n, grouping=True, monetary=True)
+        n = n.replace(",", "ṯ").replace(".", "ḏ")
+        #n = str(n)
+    if sep_in[0] in [" ", ",", "٬", "\u2009"]:
+        n = n.replace(r'[\u0020,٬\u2009]', "ṯ")
+    elif sep_in[0] == ".":
+        n = n.replace(".", "ṯ")
+    if sep_in[1] in [",", ".", "٫"]:
+        n = n.replace(r'[,.٫]', "ḏ")
+    sep = sep_out
+    t = n.maketrans("0123456789", "٠١٢٣٤٥٦٧٨٩")
+    locale.setlocale(locale.LC_ALL, "")
+    return n.translate(t).replace("ṯ", sep[0] ).replace("ḏ", sep[1])
+
+convert_to_kurdish_ns = convert_to_arab_ns
+
+#
 # Locale formatted numbers using PyICU
 #   Supports both integers and floating point numbers.
 #
