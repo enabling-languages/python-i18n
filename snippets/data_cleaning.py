@@ -17,25 +17,25 @@ from icu import UnicodeString, Locale, Normalizer2, UNormalizationMode2
 #   Simple wrappers for Unicode normalisation
 #
 
-def NFD(s, engine=ud):
+def NFD(s, engine="ud"):
     if engine == "icu":
         normalizer = Normalizer2.getInstance(None, "nfc", UNormalizationMode2.DECOMPOSE)
         return normalizer.normalize(s)
     return ud.normalize('NFD', s)
 
-def NFKD(s, engine=ud):
+def NFKD(s, engine="ud"):
     if engine == "icu":
         normalizer = Normalizer2.getInstance(None, "nfkc", UNormalizationMode2.DECOMPOSE)
         return normalizer.normalize(s)
     return ud.normalize('NFKD', s)
 
-def NFC(s, engine=ud):
+def NFC(s, engine="ud"):
     if engine == "icu":
         normalizer = Normalizer2.getInstance(None, "nfc", UNormalizationMode2.COMPOSE)
         return normalizer.normalize(s)
     return ud.normalize('NFC', s)
 
-def NFKC(s, engine=ud):
+def NFKC(s, engine="ud"):
     if engine == "icu":
         normalizer = Normalizer2.getInstance(None, "nfkc", UNormalizationMode2.COMPOSE)
         return normalizer.normalize(s)

@@ -1,4 +1,4 @@
-# Python and Pandas internationalisation
+appropriate # Python and Pandas internationalisation
 
 ## Data visualisation issues for languages that need bidirectional support or complex font rendering.
 
@@ -19,16 +19,19 @@ Using the _mplcairo_ backend for _matplotlib_ we can display plot titles, axes l
 
 There are two missing pieces at this point:
 
-1. Display of numeric tick labels in a numeral system approperiate for the UI language.
-2. Choice on bidirectional layout requirements of the data visualisation.
+1. Display of numeric tick labels in a numeral system appropriate  for the UI language.
+2. Choice on bidirectional layout req
+uirements of the appropriate
+ data visualisation.
 
-### Numeral systems
+## Numeral systems
 
-Regarding the first issue, it is possible to use `matplotlib.ticker.FuncFormatter()` to apply a function to convert to the target numeral system, and apply necessary grouping and decimal seperators.
+Regarding the first issue, it is possible to use `matplotlib.ticker.FuncFormatter()` to apply a function to convert to the target numeral system, and apply necessary grouping and decimal separators.
+
 ### RTL layout and data visualisation
 
 It isn't always necessary to change the layout of the plot. If the plot is using a cartesian coordinate system, it is best to use the default layout. 
-The layout used, combinined with user expectations, will impact the interpretation of trends in data visualisations. User interpretation of the visualisations, combined with user experience are critical inputs into a data visualisation design.
+The layout used, combined with user expectations, will impact the interpretation of trends in data visualisations. User interpretation of the visualisations, combined with user experience are critical inputs into a data visualisation design.
 
 If a RTL layout is required:
 

@@ -25,7 +25,7 @@ from laonlp.tokenize import word_tokenize as lao_wt
 from pythainlp.tokenize import word_tokenize as thai_wt
 #from khmernltk import word_tokenize as khmer_wt
 from icu import BreakIterator, Locale, UnicodeString, Transliterator, UTransDirection
-# Code for interbnal testing and development:
+# Code for internal testing and development:
 # libpath = os.path.expanduser('~/dev/i18n/libr/yale-lao')
 libpath = os.path.expanduser('./')
 if libpath not in sys.path:
@@ -174,7 +174,7 @@ def stringLength(text):
     datahead = ['Component', 'Count']
     print(tabulate(data, headers=datahead, tablefmt='grid'))
 
-# Convert a string of comma or space seperated unicode codepoints to characters
+# Convert a string of comma or space separated unicode codepoints to characters
 #    Usage: codepointsToChar("U+0063 U+0301")
 #        or codepointsToChar("0063 0301")
 def codepointsToChar(str):
@@ -425,7 +425,7 @@ def segment_words(text, engine="icu", lang="", sep="\u0020"):
         print("Unsupported language specified", file=sys.stderr)
         sys.exit(1)
     if sep not in SUPPORTED_SEPERATORS:
-        print("Unsupported token seperator", file=sys.stderr)
+        print("Unsupported token separator", file=sys.stderr)
         sys.exit(1)
     if engine == "icu":
         # return icu_tokenise(text, lang, sep)

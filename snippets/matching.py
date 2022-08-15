@@ -7,7 +7,7 @@
 #
 ####################
 
-import unicodedata as ud
+import unicodedataplus as ud
 
 def caseless_match(x, y):
   return x.casefold() == y.casefold()

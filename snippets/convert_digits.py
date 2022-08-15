@@ -54,8 +54,8 @@ def convert_numeral_systems(n, p=None, system_out="", system_in="latn", decimal=
         n = locale.format_string(format_string, n, grouping=True, monetary=True)
         n = n.replace(",", "ṯ").replace(".", "ḏ")
         #n = str(n)
-    if sep_in[0] in [" ", ",", "٬", "\u2009"]:
-        n = n.replace(r'[\u0020,٬\u2009]', "ṯ")
+    if sep_in[0] in [" ", ",", "٬", "\u2009", "\u202F"]:
+        n = n.replace(r'[\u0020,٬\u2009\u202F]', "ṯ")
     elif sep_in[0] == ".":
         n = n.replace(".", "ṯ")
     if sep_in[1] in [",", ".", "٫"]:
@@ -149,17 +149,16 @@ def convert_to_arab_ns(n, p=None, decimal=2, sep_in=["", "."], sep_out=["\u066C"
         format_string = '%0.' + str(decimal_places) + 'f' if type(n) == float else '%d'
         n = locale.format_string(format_string, n, grouping=True, monetary=True)
         n = n.replace(",", "ṯ").replace(".", "ḏ")
-        #n = str(n)
-    if sep_in[0] in [" ", ",", "٬", "\u2009"]:
-        n = n.replace(r'[\u0020,٬\u2009]', "ṯ")
+    if sep_in[0] in [" ", ",", "٬", "\u2009", "\u202F"]:
+        n = n.replace(r'[\u0020,٬\u2009\u202F]', "ṯ")
     elif sep_in[0] == ".":
         n = n.replace(".", "ṯ")
     if sep_in[1] in [",", ".", "٫"]:
         n = n.replace(r'[,.٫]', "ḏ")
-    sep = sep_out
+    #sep = sep_out
     t = n.maketrans("0123456789", "٠١٢٣٤٥٦٧٨٩")
     locale.setlocale(locale.LC_ALL, "")
-    return n.translate(t).replace("ṯ", sep[0] ).replace("ḏ", sep[1])
+    return n.translate(t).replace("ṯ", sep_out[0] ).replace("ḏ", sep_out[1])
 
 convert_to_kurdish_ns = convert_to_arab_ns
 
