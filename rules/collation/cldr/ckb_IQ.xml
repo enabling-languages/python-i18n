@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ldml SYSTEM "dtd/ldml.dtd">
+<!--
+Copyright © 2022 Enabling Languages.
+Released under MIT license.
+CLDR data files are interpreted according to the LDML specification (http://unicode.org/reports/tr35/).
+-->
+<ldml>
+	<identity>
+		<version number="$Revision$"/>
+		<language type="ckb" /> 
+		<territory type="IQ" /> 
+	</identity>
+	<collations>
+		<collation type="standard">
+			<cr><![CDATA[
+				[import ckb]
+			]]></cr>
+		</collation>
+	</collations>
+</ldml>

@@ -1,0 +1,112 @@
+comment_char %
+escape_char /
+
+% This file is part of the GNU C Library and contains locale data.
+% The Free Software Foundation does not claim any copyright interest
+% in the locale data contained in this file.  The foregoing does not
+% affect the license of the GNU C Library as a whole.  It does not
+% exempt you from the conditions of the license if your use would
+% otherwise be governed by that license.
+
+% FOR ALL KURDISH DIALECTS USING ARABIC ALPHABETS
+% Central Kurdish language locale for Iraq (using Arabic letters):
+% Filename: ckb_iq
+% Locale name: ckb_iq.UTF-8
+% Language: Central Kurdish (Sorani)
+% Language abbreviation: KU-AR (Kurdish - Arabic letters)
+% Charset: UTF-8
+% Creation Date: 2009-11-03
+% History:
+% October 2021: Defining ckb_IQ@academy locale based on CLDR ckb_IQ
+
+LC_IDENTIFICATION
+
+title	   "Central Kurdish language locale for Iraq (Kurdish Academy orthography)"
+source	   "andjc"
+address    ""
+contact    "andjc"
+email	   ""
+tel	   ""
+fax	   ""
+language   "Central Kurdish"
+territory  "Iraq"
+revision   "0.1"
+date	   "2022-10-09"
+
+category "i18n:2012";LC_IDENTIFICATION
+category "i18n:2012";LC_CTYPE
+category "i18n:2012";LC_COLLATE
+category "i18n:2012";LC_TIME
+category "i18n:2012";LC_NUMERIC
+category "i18n:2012";LC_MONETARY
+category "i18n:2012";LC_MESSAGES
+category "i18n:2012";LC_PAPER
+category "i18n:2012";LC_NAME
+category "i18n:2012";LC_ADDRESS
+category "i18n:2012";LC_TELEPHONE
+category "i18n:2012";LC_MEASUREMENT
+
+END LC_IDENTIFICATION
+
+LC_CTYPE
+copy "i18n"
+END LC_CTYPE
+
+LC_COLLATE
+
+% [normalization on]
+% [reorder Arab]
+% &ڕ < ز
+% &و < ۆ < وو
+
+% Copy the template from ISO/IEC 14651
+copy "iso14651_t1"
+
+collating-element <arabic-letter-waw-with-arabic-letter-waw> from "<U0648><U0648>"  % U+0648 U+0648
+
+reorder-after <S0695> %  U+0695 - ARABIC LETTER REH WITH SMALL V BELOW
+<S0632> % U+0632 - ARABIC LETTER ZAIN
+
+reorder-after <U0648> % U+0648 - ARABIC LETTER WAW
+<S06C6> % U+06C6 - ARABIC LETTER OE
+<arabic-letter-waw-with-arabic-letter-waw>
+
+reorder-end
+
+END LC_COLLATE
+
+LC_MONETARY
+copy "ckb_IQ"
+END LC_MONETARY
+
+LC_NUMERIC
+copy "ckb_IQ"
+END LC_NUMERIC
+
+LC_TIME
+copy "ckb_IQ"
+END LC_TIME
+
+LC_MESSAGES
+copy "ckb_IQ"
+END LC_MESSAGES
+
+LC_PAPER
+copy "ckb_IQ"
+END LC_PAPER
+
+LC_NAME
+copy "ckb_IQ"
+END LC_NAME
+
+LC_ADDRESS
+copy "ckb_IQ"
+END LC_ADDRESS
+
+LC_TELEPHONE
+copy "ckb_IQ"
+END LC_TELEPHONE
+
+LC_MEASUREMENT
+copy "ckb_IQ"
+END LC_MEASUREMENT
