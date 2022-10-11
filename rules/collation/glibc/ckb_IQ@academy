@@ -62,15 +62,6 @@ LC_COLLATE
 % Copy the template from ISO/IEC 14651
 copy "iso14651_t1"
 
-collating-element <arabic-letter-waw-with-arabic-letter-waw> from "<U0648><U0648>"  % U+0648 U+0648
-
-reorder-after <S0695> %  U+0695 - ARABIC LETTER REH WITH SMALL V BELOW
-<S0632> % U+0632 - ARABIC LETTER ZAIN
-
-reorder-after <U0648> % U+0648 - ARABIC LETTER WAW
-<S06C6> % U+06C6 - ARABIC LETTER OE
-<arabic-letter-waw-with-arabic-letter-waw>
-
 reorder-end
 
 END LC_COLLATE
