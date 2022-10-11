@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ldml SYSTEM "dtd/ldml.dtd">
+<!-- <!DOCTYPE ldml SYSTEM "../../common/dtd/ldml.dtd"> -->
+<!--
+Copyright © 2022 Enabling Languages.
+Released under MIT license.
+CLDR data files are interpreted according to the LDML specification (http://unicode.org/reports/tr35/).
+-->
+<ldml>
+	<identity>
+		<version number="$Revision$" />
+		<language type="ckb" />
+	</identity>
+	<collations>
+		<!-- TODO: Add collation type="search" -->
+		<collation type="standard" draft="contributed"
+				references="https://en.wikipedia.org/wiki/Kurdish_alphabets#Sorani_alphabet 2022-sep-22">
+			<!-- Note that this collation is intended only for Sorani/Central Kurdish. -->
+			<cr><![CDATA[
+				[normalization on]
+                [reorder Arab]
+                #&\u0695 < \u0632
+                &ڕ < ز
+                #&\u0648 < \u06C6 < \u0648\u0648
+                &و < ۆ < وو
+			]]></cr>
+		</collation>
+	</collations>
+</ldml>
+

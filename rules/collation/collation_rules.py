@@ -80,3 +80,19 @@ kyu_Mymr_rules = (
     "< \u1072 < \u102E < \u102D < \u1036 < \u1032 < \u1073 < \u1074 < \u1034"
     "< \u102F < \u1030 < \u103C < \u103B < \u103D < \u103E"
 )
+
+# Sorani Kurdish (Iraq) ckb_IQ  Using glibc  https://sourceware.org/git/?p=glibc.git;a=blob_plain;f=localedata/locales/ckb_IQ;hb=HEAD
+ckb_glibc_rules = ckb_IQ_glibc_rules = (
+    "[normalization on]"
+    "[reorder Arab]"
+    "&\u0631<\u0695"
+    "&\u0646<\u0648<\u06C6"
+)
+
+# Sorani Kurdish (Iraq) ckb_IQ  Using sort order of the Kurdish Academy standard 
+ckb_rules = ckb_IQ_rules = (
+    "[normalization on]"
+    "[reorder Arab]"
+    "&\u0695 < \u0632"
+    "&\u0648 < \u06C6 < \u0648\u0648"
+)

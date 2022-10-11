@@ -231,3 +231,5 @@ $RECYCLE.BIN/
 # Repo specfic
 notes/
 print/
+archive/
+.vscode/
