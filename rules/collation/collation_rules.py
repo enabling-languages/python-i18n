@@ -93,6 +93,6 @@ ckb_glibc_rules = ckb_IQ_glibc_rules = (
 ckb_rules = ckb_IQ_rules = (
     "[normalization on]"
     "[reorder Arab]"
-    "&\u0695 < \u0632"
+    "&\u0631 < \u0695 < \u0632"
     "&\u0648 < \u06C6 < \u0648\u0648"
 )

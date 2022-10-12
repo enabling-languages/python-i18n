@@ -54,13 +54,18 @@ END LC_CTYPE
 
 LC_COLLATE
 
-% [normalization on]
-% [reorder Arab]
-% &ڕ < ز
-% &و < ۆ < وو
-
 % Copy the template from ISO/IEC 14651
 copy "iso14651_t1"
+
+collating-element <double-waw> from "<U0648><U0648>"
+
+reorder-after <S0631> % ARABIC LETTER REH
+<S0695> % ARABIC LETTER REH WITH SMALL V BELOW
+<S0632> % ARABIC LETTER ZAIN
+
+reorder-after <U0648> % ARABIC LETTER WAW
+<U06C6> % ARABIC LETTER OE
+<double-waw> % ARABIC LETTER WAW + ARABIC LETTER WAW
 
 reorder-end
 
