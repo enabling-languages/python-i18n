@@ -8,16 +8,15 @@ escape_char /
 % exempt you from the conditions of the license if your use would
 % otherwise be governed by that license.
 
-% FOR ALL KURDISH DIALECTS USING ARABIC ALPHABETS
 % Central Kurdish language locale for Iraq (using Arabic letters):
-% Filename: ckb_iq
-% Locale name: ckb_iq.UTF-8
+% Filename: ckb_iq@academy
+% Locale name: ckb_iq.UTF-8@academy
 % Language: Central Kurdish (Sorani)
 % Language abbreviation: KU-AR (Kurdish - Arabic letters)
 % Charset: UTF-8
-% Creation Date: 2009-11-03
+% Creation Date: 20022-10-14
 % History:
-% October 2021: Defining ckb_IQ@academy locale based on CLDR ckb_IQ
+% October 2021: Defining ckb_IQ@academy locale based on CLDR ckb_IQ and GLIBC ckb_IQ
 
 LC_IDENTIFICATION
 
@@ -31,7 +30,7 @@ fax	   ""
 language   "Central Kurdish"
 territory  "Iraq"
 revision   "0.1"
-date	   "2022-10-09"
+date	   "2022-10-14"
 
 category "i18n:2012";LC_IDENTIFICATION
 category "i18n:2012";LC_CTYPE
