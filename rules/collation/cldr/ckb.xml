@@ -19,10 +19,10 @@ CLDR data files are interpreted according to the LDML specification (http://unic
 			<cr><![CDATA[
 				[normalization on]
                 [reorder Arab]
-                # &\u0631 < \u0695 < \u0632
-				&ر < ڕ < ز
-                # &\u0648 < \u06C6 < \u0648\u0648
-				&و < ۆ < وو
+                # &\u0631 < \u0695
+				&ر < ڕ
+                # &\u0648 < \u0648\u0648
+				&و < وو
 			]]></cr>
 		</collation>
 	</collations>
