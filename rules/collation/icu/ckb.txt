@@ -7,8 +7,8 @@ ckb{
             Sequence{
                 "[normalization on]"
                 "[reorder Arab]"
-                "&ڕ < ز"
-                "&و < ۆ < وو"
+                "&ر < ڕ"
+                "&و < وو"
             }
             Version{"42"}
         }
