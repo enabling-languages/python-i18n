@@ -8,6 +8,7 @@
 ####################
 
 import unicodedataplus as ud
+import regex as re
 
 def caseless_match(x, y):
   return x.casefold() == y.casefold()
@@ -19,6 +20,8 @@ def compatibility_caseless_match(x, y):
   return ud.normalize("NFKD", ud.normalize("NFKD", ud.normalize("NFD", x).casefold()).casefold()) == ud.normalize("NFKD", ud.normalize("NFKD", ud.normalize("NFD", y).casefold()).casefold())
 
 def NFKC_Casefold(s):
+  pattern = re.compile(r"\p{Default_Ignorable_Code_Point=Yes}")
+  s = re.sub(pattern, '', s)
   return ud.normalize("NFC", ud.normalize('NFKC', s).casefold())
 
 def identifier_caseless_match(x, y):
